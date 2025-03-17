@@ -30,13 +30,13 @@ jobs:
             git pull origin main
 
             echo "🐳 Stopping current Caddy container..."
-            docker-compose down
+            docker compose down
 
             echo "⬇️ Pulling latest Caddy image..."
-            docker-compose pull
+            docker compose pull
 
             echo "🚀 Starting Caddy container..."
-            docker-compose up -d
+            docker compose up -d
           EOF
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
