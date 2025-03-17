@@ -3,7 +3,7 @@ name: Deploy Caddy
 on:
   push:
     branches:
-      - main  # Runs this when you push to the main branch
+      - main  # Triggers when you push to main
 
 jobs:
   deploy:
@@ -11,16 +11,22 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Deploy to DigitalOcean
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DO_HOST }}
-          username: ${{ secrets.DO_USER }}
-          key: ${{ secrets.DO_SSH_KEY }}
-          script: |
-            cd /home/${{ secrets.DO_USER }}/caddy
+      - name: Set up SSH key
+        run: |
+          echo "$SSH_KEY" > private_key
+          chmod 600 private_key
+
+      - name: Deploy to Droplet
+        run: |
+          ssh -i private_key -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << 'EOF'
+            cd ~/caddy
             git pull origin main
-            docker compose down
-            docker compose up -d --build
+            docker-compose down
+            docker-compose up -d
+          EOF
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
