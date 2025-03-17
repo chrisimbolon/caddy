@@ -3,7 +3,7 @@ name: Deploy Caddy
 on:
   push:
     branches:
-      - main  # Triggers when you push to main
+      - main  # Runs on push to main
 
 jobs:
   deploy:
@@ -21,14 +21,22 @@ jobs:
       - name: Deploy to Droplet
         run: |
           ssh -i private_key -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << 'EOF'
-
             echo "🔹 Navigating to project directory..."
             cd /home/apps/caddy || { echo "❌ Folder not found!"; exit 1; }
+
+            echo "🔄 Pulling latest changes..."
             git pull origin main
+
+            echo "🐳 Stopping current Caddy container..."
             docker-compose down
+
+            echo "⬇️ Pulling latest Caddy image..."
+            docker-compose pull
+
+            echo "🚀 Starting Caddy container..."
             docker-compose up -d
           EOF
         env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
