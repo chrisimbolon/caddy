@@ -1,0 +1,21 @@
+# Serve RandomDots
+randomdots.id {
+    respond "RandomDots app is not deployed yet. Coming soon!" 200
+#reverse_proxy randomdots-container:3000
+}
+
+# Serve Taekwondo Coach
+chrisimbolon.dev/taekwondo-coach {
+    reverse_proxy taekwondo-coach-container:8000
+}
+
+# Serve Planet Wander (React)
+chrisimbolon.dev/planetwander {
+    reverse_proxy planetwander-container:3000
+}
+
+# Serve Fullstack Pizza (Static)
+chrisimbolon.dev/fullstack-pizza {
+    root * /var/www/fullstack-pizza
+    file_server
+}
