@@ -4,6 +4,6 @@
 
 # Serve portfolio site
 chrisimbolon.dev {
-    reverse_proxy portfolio-container:80
+    reverse_proxy portfolio-container:3000
 }
 
