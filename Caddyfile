@@ -6,6 +6,9 @@
 chrisimbolon.dev {
     reverse_proxy portfolio-container:80
 
+    @noSlash path /planetwander
+    redir @noSlash /planetwander/
+
     handle_path /planetwander/* {
         reverse_proxy planetwander_frontend:80
     }
