@@ -14,6 +14,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+      - /home/apps/fullstack-pizza:/home/apps/fullstack-pizza
 
 volumes:
   caddy_data:
