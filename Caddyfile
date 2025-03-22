@@ -16,5 +16,9 @@ chrisimbolon.dev {
 }
 
 randomdots.id {
-    reverse_proxy randomdots-container:3000
+    reverse_proxy randomdots-nginx:80
+
+    handle_path /api/* {
+        reverse_proxy randomdots-app:3000
+    }
 }
