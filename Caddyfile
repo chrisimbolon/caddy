@@ -16,6 +16,18 @@ chrisimbolon.dev {
     handle_path /api/* {
         reverse_proxy planetwander_backend:8000
     }
+
+    handle /fullstack-pizza/* {
+        root * /home/apps/fullstack-pizza
+        file_server
+    }
+
+    handle /fullstack-pizza {
+        root * /home/apps/fullstack-pizza
+        file_server
+    }
+
+    redir /fullstack-pizza /fullstack-pizza/
 }
 
 randomdots.id {
