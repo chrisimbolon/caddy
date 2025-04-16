@@ -3,7 +3,7 @@ name: Deploy Caddy
 on:
   push:
     branches:
-      - main  # Runs on push to main
+      - main  
 
 jobs:
   deploy:
