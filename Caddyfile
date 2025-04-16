@@ -30,5 +30,5 @@ randomdots.id {
 }
 
 taekwondo-coach.chrisimbolon.dev {
-    reverse_proxy djangotaekwondocoach-web:8000
+    reverse_proxy djangotaekwondocoach-nginx:80
 }
