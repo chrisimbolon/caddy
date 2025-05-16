@@ -24,7 +24,7 @@ chrisimbolon.dev {
 
     redir /fullstack-pizza /fullstack-pizza/
 
-    handle_path /mini-analytics/api/* {
+    handle /mini-analytics/api/* {
         reverse_proxy analytics-backend:8010
     }
 
