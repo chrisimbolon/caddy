@@ -42,3 +42,15 @@ taekwondo-coach.chrisimbolon.dev {
     reverse_proxy djangotaekwondocoach-nginx:80
 }
 
+eventhub.chrisimbolon.dev {
+
+    # Backend API
+    handle_path /api/* {
+        reverse_proxy eventhub_backend:8000
+    }
+
+    # Everything else → frontend
+    handle {
+        reverse_proxy eventhub_frontend:5173
+    }
+}
