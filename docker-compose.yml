@@ -1,11 +1,7 @@
-version: '3.8'
-
 services:
   caddy:
     image: caddy:latest
     container_name: caddy-container
-    networks:
-      - web_network
     restart: always
     ports:
       - "80:80"
@@ -15,6 +11,10 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - /home/apps/fullstack-pizza:/home/apps/fullstack-pizza
+    networks:
+      - web_network
+      - eventhub_eventhub-net
+      - taekwondo-coach_taekwondo-net
 
 volumes:
   caddy_data:
@@ -22,4 +22,8 @@ volumes:
 
 networks:
   web_network:
-    external: true  
+    external: true
+  eventhub_eventhub-net:
+    external: true
+  taekwondo-coach_taekwondo-net:
+    external: true
