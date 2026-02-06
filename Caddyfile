@@ -45,7 +45,7 @@ taekwondo-coach.chrisimbolon.dev {
 eventhub.chrisimbolon.dev {
 
     # Backend API
-    handle_path /api/* {
+    handle /api/* {
         reverse_proxy eventhub_backend:8000
     }
 
