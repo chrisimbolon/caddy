@@ -51,6 +51,6 @@ eventhub.chrisimbolon.dev {
 
     # Everything else → frontend
     handle {
-        reverse_proxy eventhub_frontend:5173
+        reverse_proxy eventhub_frontend:4173
     }
 }
