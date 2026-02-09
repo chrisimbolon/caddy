@@ -43,14 +43,21 @@ taekwondo-coach.chrisimbolon.dev {
 }
 
 eventhub.chrisimbolon.dev {
-
-    # Backend API
     handle /api/* {
         reverse_proxy eventhub_backend:8000
     }
-
-    # Everything else → frontend
+    
     handle {
-        reverse_proxy eventhub_frontend:4173
+        root * /var/www/eventhub
+        try_files {path} /index.html
+        file_server
+        encode gzip
+        
+        @static {
+            path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
+        }
+        header @static Cache-Control "public, max-age=31536000, immutable"
     }
+}
+
 }
