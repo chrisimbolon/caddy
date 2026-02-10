@@ -24,14 +24,6 @@ chrisimbolon.dev {
 
     redir /fullstack-pizza /fullstack-pizza/
 
-    handle /mini-analytics/api/* {
-        reverse_proxy analytics-backend:8000
-    }
-
-    handle_path /mini-analytics/* {
-        reverse_proxy analytics-frontend:80
-    }
-
 }
 
 randomdots.id {
@@ -47,18 +39,13 @@ eventhub.chrisimbolon.dev {
         reverse_proxy eventhub_backend:8000
     }
 
-     # Django static files (admin CSS, JS, etc.)
     handle /static/* {
-        root * /var/www/eventhub-backend
-        file_server
-        encode gzip
+        reverse_proxy eventhub_backend:8000
     }
-    
-    # Django media files (uploads, QR codes, etc.)
+
     handle /media/* {
-        root * /var/www/eventhub-backend
-        file_server
-    }
+        reverse_proxy eventhub_backend:8000
+    } 
     
     handle {
         root * /var/www/eventhub
