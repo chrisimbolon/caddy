@@ -46,6 +46,19 @@ eventhub.chrisimbolon.dev {
     handle /api/* {
         reverse_proxy eventhub_backend:8000
     }
+
+     # Django static files (admin CSS, JS, etc.)
+    handle /static/* {
+        root * /var/www/eventhub-backend
+        file_server
+        encode gzip
+    }
+    
+    # Django media files (uploads, QR codes, etc.)
+    handle /media/* {
+        root * /var/www/eventhub-backend
+        file_server
+    }
     
     handle {
         root * /var/www/eventhub
