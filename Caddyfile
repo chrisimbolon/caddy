@@ -1,8 +1,10 @@
 {
-    email sambungdata@gmail.com  #  for Let's Encrypt SSL
+    email sambungdata@gmail.com
 }
 
-# Serve portfolio site
+# ==============================
+# Portfolio
+# ==============================
 chrisimbolon.dev {
     reverse_proxy portfolio-container:80
 
@@ -20,21 +22,30 @@ chrisimbolon.dev {
     handle_path /fullstack-pizza/* {
         root * /home/apps/fullstack-pizza
         file_server
-    }   
+    }
 
     redir /fullstack-pizza /fullstack-pizza/
-
 }
 
+# ==============================
+# RandomDots
+# ==============================
 randomdots.id {
     reverse_proxy randomdots-app:3000
 }
 
+# ==============================
+# Taekwondo Coach
+# ==============================
 taekwondo-coach.chrisimbolon.dev {
     reverse_proxy djangotaekwondocoach-nginx:80
 }
 
+# ==============================
+# EventHub
+# ==============================
 eventhub.chrisimbolon.dev {
+
     handle /api/* {
         reverse_proxy eventhub_backend:8000
     }
@@ -45,17 +56,39 @@ eventhub.chrisimbolon.dev {
 
     handle /media/* {
         reverse_proxy eventhub_backend:8000
-    } 
-    
+    }
+
     handle {
         root * /var/www/eventhub
         try_files {path} /index.html
         file_server
         encode gzip
-        
+
         @static {
             path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
         }
         header @static Cache-Control "public, max-age=31536000, immutable"
     }
+}
+
+# ==============================
+# JasaPro (NEW – Static Brochure)
+# ==============================
+jasapro.co.id {
+
+    root * /var/www/jasapro
+    try_files {path} /index.html
+    file_server
+    encode gzip
+
+    @static {
+        path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
+    }
+
+    header @static Cache-Control "public, max-age=31536000, immutable"
+}
+
+# Optional www redirect
+www.jasapro.co.id {
+    redir https://jasapro.co.id{uri} 300
 }
