@@ -9,6 +9,7 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - /var/www/eventhub:/var/www/eventhub
+      - /var/www/jasapro:/var/www/jasapro
       - caddy_data:/data
       - caddy_config:/config
       - /home/apps/fullstack-pizza:/home/apps/fullstack-pizza
