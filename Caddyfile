@@ -76,7 +76,7 @@ eventhub.chrisimbolon.dev {
 # ==============================
 jasapro.co.id {
 
-    root * /var/www/jasapro
+    root * /var/www/jasapro/dist
     try_files {path} /index.html
     file_server
     encode gzip
@@ -88,7 +88,7 @@ jasapro.co.id {
     header @static Cache-Control "public, max-age=31536000, immutable"
 }
 
-# Optional www redirect
+# Optional www redirect action
 www.jasapro.co.id {
     redir https://jasapro.co.id{uri} 300
 }
