@@ -77,9 +77,12 @@ eventhub.chrisimbolon.dev {
 jasapro.co.id {
 
     root * /var/www/jasapro/dist
-    try_files {path} /index.html
-    file_server
+
     encode gzip
+
+    try_files {path} {path}/ /index.html
+
+    file_server
 
     @static {
         path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
