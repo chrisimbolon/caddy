@@ -10,6 +10,8 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - /var/www/eventhub:/var/www/eventhub
       - /var/www/jasapro:/var/www/jasapro
+      - /var/www/kla:/var/www/kla
+      - /var/lib/docker/volumes/kla_media/_data:/var/www/kla-media
       - caddy_data:/data
       - caddy_config:/config
       - /home/apps/fullstack-pizza:/home/apps/fullstack-pizza
