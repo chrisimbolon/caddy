@@ -95,3 +95,32 @@ jasapro.co.id {
 www.jasapro.co.id {
     redir https://jasapro.co.id{uri} 300
 }
+
+# ==============================
+# KLA — Kusuma Lestari Agro
+# ==============================
+kusumaorganik.com {
+    handle /api/* {
+        reverse_proxy kla_backend:8000
+    }
+    handle /static/* {
+        reverse_proxy kla_backend:8000
+    }
+    handle /media/* {
+        reverse_proxy kla_backend:8000
+    }
+    handle {
+        root * /var/www/kla
+        try_files {path} /index.html
+        file_server
+        encode gzip
+        @static {
+            path *.js *.css *.png *.jpg *.jpeg *.gif *.ico *.svg *.woff *.woff2
+        }
+        header @static Cache-Control "public, max-age=31536000, immutable"
+    }
+}
+
+www.kusumaorganik.com {
+    redir https://kusumaorganik.com{uri} 301
+}
